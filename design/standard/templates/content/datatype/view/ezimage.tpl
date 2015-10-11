@@ -49,7 +49,6 @@ Input:
             {/if}
 
             {def $mq_mappings = ezini( $responsive_image_class, 'MediaQueryMappings', 'ngresponsiveimages.ini' )}
-            {ezscript_require( array( 'matchmedia.js', 'picturefill.js' ) )}
             {set-block variable = $responsive_images}
                 <span data-src={$image_content[ezini( $responsive_image_class, 'DefaultMap', 'ngresponsiveimages.ini' )].url|ezroot}></span>
                 {foreach $mq_mappings as $screen => $mq_map_alias}

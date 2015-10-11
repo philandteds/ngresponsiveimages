@@ -2,4 +2,7 @@
 
 [ExtensionSettings]
 DesignExtensions[]=ngresponsiveimages
+
+[JavascriptSettings]
+FrontendJavaScriptList[]=picturefill.min.js
 */ ?>
