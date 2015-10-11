@@ -50,12 +50,18 @@ Input:
 
             {def $mq_mappings = ezini( $responsive_image_class, 'MediaQueryMappings', 'ngresponsiveimages.ini' )}
             {set-block variable = $responsive_images}
-                <span data-src={$image_content[ezini( $responsive_image_class, 'DefaultMap', 'ngresponsiveimages.ini' )].url|ezroot}></span>
-                {foreach $mq_mappings as $screen => $mq_map_alias}
+                sizes="{foreach $mq_mappings as $screen => $mq_map_alias}
                     {if and( is_set( $mq_expressions[$screen] ), $mq_expressions[$screen]|count )}
-                        <span data-src={$image_content[$mq_map_alias].url|ezroot} data-media="{$mq_expressions[$screen]|wash}"></span>
+                        {$mq_expressions[$screen]|wash}
+                        {delimiter}, {delimiter}
                     {/if}
-                {/foreach}
+                {/foreach}"
+                srcset="{foreach $mq_mappings as $screen => $mq_map_alias}
+                    {if and( is_set( $mq_expressions[$screen] ), $mq_expressions[$screen]|count )}
+                        {$image_content[$mq_map_alias].url|ezroot} {$image_content[$mq_map_alias].width|wash}w
+                        {delimiter}, {delimiter}
+                    {/if}
+                {/foreach}, {$image_content[ezini( $responsive_image_class, 'DefaultMap', 'ngresponsiveimages.ini' )].url|ezroot} {$image_content[ezini( $responsive_image_class, 'DefaultMap', 'ngresponsiveimages.ini' )].width|wash}w"
             {/set-block}
             {* add undef *}
         {/if}
@@ -106,14 +112,10 @@ Input:
         {if $href}<a href={$href}{if and( is_set( $link_class ), $link_class )} class="{$link_class}"{/if}{if and( is_set( $link_id ), $link_id )} id="{$link_id}"{/if}{if $target} target="{$target}"{/if}{if and( is_set( $link_title ), $link_title )} title="{$link_title|wash}"{/if}>{/if}
 
         {if is_set( $responsive_image_class )}
-            {if and( ezini_hasvariable( $responsive_image_class, 'DefaultMap', 'ngresponsiveimages.ini' ), is_set( $responsive_disabled )|not )}<span data-picture data-alt="{$alt_text|wash(xhtml)}">{$responsive_images}<noscript>{/if}
+            {if and( ezini_hasvariable( $responsive_image_class, 'DefaultMap', 'ngresponsiveimages.ini' ), is_set( $responsive_disabled )|not )}{$responsive_images}{/if}
         {/if}
 
-        <img src={$image.url|ezroot}{if $css_image_class} class="{$css_image_class}"{/if}{if $hspace} hspace="{$hspace}"{/if} style="{$inline_style}" alt="{$alt_text|wash(xhtml)}" title="{$title|wash(xhtml)}" />
-
-        {if is_set( $responsive_image_class )}
-            {if and( ezini_hasvariable( $responsive_image_class, 'DefaultMap', 'ngresponsiveimages.ini' ), is_set( $responsive_disabled )|not )}</noscript></span>{/if}
-        {/if}
+        <img src={$image.url|ezroot}{if $css_image_class} class="{$css_image_class}"{/if}{if $hspace} hspace="{$hspace}"{/if} style="{$inline_style}" alt="{$alt_text|wash(xhtml)}" title="{$title|wash(xhtml)}" {if and( is_set( $responsive_image_class ), ezini_hasvariable( $responsive_image_class, 'DefaultMap', 'ngresponsiveimages.ini' ), is_set( $responsive_disabled )|not )}{$responsive_images}{/if} />
 
         {if $href}</a>{/if}
     {/if}
