@@ -1,5 +1,10 @@
 <?php /* #?ini charset="utf-8"?
 
+[PluginSettings]
+ExtraAttributesFile[]=parts/img_ngresponsive.tpl
+#ExtraTagsBeforeFile[]=
+#ExtraTagsAfterFile[]=
+
 #[AliasSettings]
 #AliasList[]=imagefull
 #AliasList[]=image2full
