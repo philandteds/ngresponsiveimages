@@ -2,8 +2,8 @@
 
 [PluginSettings]
 ExtraAttributesFile[]=parts/img_ngresponsive.tpl
-#ExtraTagsBeforeFile[]=
-#ExtraTagsAfterFile[]=
+#ExtraTagsBeforeFile[]=parts/img_tags_before.tpl
+#ExtraTagsAfterFile[]=parts/img_tags_after.tpl
 
 #[AliasSettings]
 #AliasList[]=imagefull
