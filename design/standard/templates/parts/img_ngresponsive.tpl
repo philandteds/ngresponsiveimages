@@ -11,7 +11,7 @@
             {if $use_pic_tag|not}
                 sizes="{foreach $mq_mappings as $screen => $mq_map_alias}
                     {if and( is_set( $mq_expressions[$screen] ), $mq_expressions[$screen]|count )}
-                        {$mq_expressions[$screen]|wash}
+                        {$mq_expressions[$screen]|wash} 100vw
                     {/if}
                         {delimiter}, {/delimiter}
                 {/foreach}"
