@@ -4,5 +4,5 @@
 DesignExtensions[]=ngresponsiveimages
 
 [JavaScriptSettings]
-FrontendJavaScriptList[]=picturefill.min.js
+FrontendJavaScriptList[]=lazysizes.min.js
 */ ?>
