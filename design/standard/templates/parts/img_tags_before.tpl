@@ -5,8 +5,8 @@
             {if ezini_hasvariable( 'Responsive', 'MediaQueryExpressions', 'ngresponsiveimages.ini' )}
                 {set $mq_expressions = ezini( 'Responsive', 'MediaQueryExpressions', 'ngresponsiveimages.ini' )}
             {/if}
-            {if ezini_hasvariable( 'Replacement', 'Rule-database', 'xrowcdn.ini' )}
-                {set $cdn_url = ezini( 'Replacement', 'Rule-database', 'xrowcdn.ini' )}
+            {if ezini_hasvariable( 'Rule-database', 'Replacement', 'xrowcdn.ini' )}
+                {set $cdn_url = ezini( 'Rule-database', 'Replacement', 'xrowcdn.ini' )}
             {/if}
 
             {def $mq_mappings = ezini( $responsive_image_class, 'MediaQueryMappings', 'ngresponsiveimages.ini' )|reverse
