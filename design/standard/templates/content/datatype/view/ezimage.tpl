@@ -115,7 +115,7 @@ Input:
             {if and( ezini_hasvariable( $responsive_image_class, 'DefaultMap', 'ngresponsiveimages.ini' ), is_set( $responsive_disabled )|not )}{$responsive_images}{/if}
         {/if}
 
-        <img src={$image.url|ezroot}{if $css_image_class} class="{$css_image_class}"{/if}{if $hspace} hspace="{$hspace}"{/if} style="{$inline_style}" alt="{$alt_text|wash(xhtml)}" title="{$title|wash(xhtml)}" {if and( is_set( $responsive_image_class ), ezini_hasvariable( $responsive_image_class, 'DefaultMap', 'ngresponsiveimages.ini' ), is_set( $responsive_disabled )|not )}{$responsive_images}{/if} />
+        <img src={$image.url|ezroot}{if or($css_image_class, $responsive_image_class)} class="{if $css_image_class}{$css_image_class|wash}{/if}{if $responsive_image_class} lazyload{/if}"{/if}{/if}{if $hspace} hspace="{$hspace}"{/if} style="{$inline_style}" alt="{$alt_text|wash(xhtml)}" title="{$title|wash(xhtml)}" {if and( is_set( $responsive_image_class ), ezini_hasvariable( $responsive_image_class, 'DefaultMap', 'ngresponsiveimages.ini' ), is_set( $responsive_disabled )|not )}{$responsive_images}{/if} />
 
         {if $href}</a>{/if}
     {/if}

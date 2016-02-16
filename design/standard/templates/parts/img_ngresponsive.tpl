@@ -17,7 +17,6 @@
                             {delimiter}, {/delimiter}
                         {/foreach}{/if}
                         {if is_set($#persistent_variable.smallest_img)}{set $image_content = $attribute.object.data_map[$#persistent_variable.smallest_img].content}{/if}"
-            class="lazyload"
             {undef $mq_expressions $mq_mappings}
             
         {/if}
