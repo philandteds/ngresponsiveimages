@@ -1,7 +1,12 @@
         {if and( or( and( is_set( $responsive_image_class ), $responsive_image_class|count ), and( ezini_hasvariable( 'Responsive', 'AlwaysResponsive', 'ngresponsiveimages.ini' ), ezini( 'Responsive', 'AlwaysResponsive', 'ngresponsiveimages.ini' )|eq('enabled')) ), ezini_hasvariable( $responsive_image_class, 'DefaultMap', 'ngresponsiveimages.ini' ) )}
-            {def $mq_expressions = array()}
+            {def $mq_expressions = array()
+                 $cdn_url = ''
+            }
             {if ezini_hasvariable( 'Responsive', 'MediaQueryExpressions', 'ngresponsiveimages.ini' )}
                 {set $mq_expressions = ezini( 'Responsive', 'MediaQueryExpressions', 'ngresponsiveimages.ini' )}
+            {/if}
+            {if ezini_hasvariable( 'Replacement', 'Rule-database', 'xrowcdn.ini' )}
+                {set $cdn_url = ezini( 'Replacement', 'Rule-database', 'xrowcdn.ini' )}
             {/if}
 
             {def $mq_mappings = ezini( $responsive_image_class, 'MediaQueryMappings', 'ngresponsiveimages.ini' )|reverse
@@ -27,7 +32,7 @@
                         {elseif and( is_set($smallest_img), $smallest_img )}
                             {set $img_url = $smallest_img.content[$mq_map_alias].url}
                         {/if}
-                        <source srcset={$img_url|ezroot()} media="{$mq_expressions[$screen]}" />
+                        <source srcset={concat( $cdn_url, $img_url|ezroot() )} media="{$mq_expressions[$screen]}" />
                     {/if}
                 {/foreach}
                 {/set-block}
@@ -37,6 +42,6 @@
                     <picture>{$sources}
                 {/if}
                 
-            {undef $mq_expressions $mq_mappings $img_alias $img_url $default_map}
+            {undef $mq_expressions $mq_mappings $img_alias $img_url $default_map $cdn_url}
             
         {/if}
