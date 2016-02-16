@@ -8,6 +8,7 @@
                  $use_pic_tag = concat('use_picture_tag', $attribute.object.id)
                  $default_map = ezini( $responsive_image_class, 'DefaultMap', 'ngresponsiveimages.ini' )}
             {set $use_pic_tag = cond( is_set($#persistent_variable[$use_pic_tag]), $#persistent_variable[$use_pic_tag], true(), false() )}
+            {if $use_pic_tag}{set $mq_mappings = $mq_mappings|extract_right(1)}{/if}
             {if $use_pic_tag|not}
                 sizes="{foreach $mq_mappings as $screen => $mq_map_alias}
                     {if and( is_set( $mq_expressions[$screen] ), $mq_expressions[$screen]|count )}
@@ -16,7 +17,7 @@
                         {delimiter}, {/delimiter}
                 {/foreach}"
             {/if}
-                srcset="{if $use_pic_tag|not}{foreach $mq_mappings as $screen => $mq_map_alias}
+                srcset="{foreach $mq_mappings as $screen => $mq_map_alias}
                             {if and( is_set( $mq_expressions[$screen] ), $mq_expressions[$screen]|count )}
                                 {$image_content[$mq_map_alias].url|ezroot('no')} {$image_content[$mq_map_alias].width|wash}w {/if}
                             {delimiter}, {/delimiter}
