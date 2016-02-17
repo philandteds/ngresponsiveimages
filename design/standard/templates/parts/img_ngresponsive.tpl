@@ -26,7 +26,7 @@
                             {if and( is_set( $mq_expressions[$screen] ), $mq_expressions[$screen]|count )}
                                 {concat( $cdn_url, $image_content[$mq_map_alias].url|ezroot('no') )} {$image_content[$mq_map_alias].width|wash}w {/if}
                             {delimiter}, {/delimiter}
-                        {/foreach}{/if}
+                        {/foreach}
                         {if is_set($#persistent_variable.smallest_img)}{set $image_content = $attribute.object.data_map[$#persistent_variable.smallest_img].content}{/if}"
             {undef $mq_expressions $mq_mappings $cdn_url}
             
