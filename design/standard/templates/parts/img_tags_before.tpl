@@ -32,7 +32,7 @@
                         {elseif and( is_set($smallest_img), $smallest_img )}
                             {set $img_url = $smallest_img.content[$mq_map_alias].url}
                         {/if}
-                        <source srcset={concat( $cdn_url, $img_url|ezroot() )} media="{$mq_expressions[$screen]}" />
+                        <source srcset="{concat( $cdn_url, $img_url|ezroot('no') )}" media="{$mq_expressions[$screen]}" />
                     {/if}
                 {/foreach}
                 {/set-block}
